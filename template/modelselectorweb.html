@@ -1,0 +1,1108 @@
+  <!-- 
+
+   Copyright 2017 Shawn Gilroy
+
+   This file is part of Discounting Model Selector, web port.
+
+   Discounting Model Selector is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, version 3.
+
+   Discounting Model Selector is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Discounting Model Selector.  If not, see http://www.gnu.org/licenses/.
+
+-->
+
+<!--Main layout-->
+<div class="container">
+
+<!--Header row-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="jumbotron">
+            <h1 class="h1-responsive">Discounting Model Selector (Web)</h1>
+            <p class="lead">The Discounting Model Selector is a web-based tool for applying approximate Bayesian model selection for delay discounting applications. This program allows researchers and clinicians with to perform an empirical comparison of Discounting models for individual series of data. This method has been simplified by Discounting Model Selector through the use of an easy-to-use interface resembling common spreadsheet software.</p>
+            <p class="lead"><strong>Published:</strong><br>Gilroy, S. P. & Hantula, D. A. (2018). Discounting model selection with area-based measures: A case for numerical integration. <i>Journal of the Experimental Analysis of Behavior</i>. <a href="https://doi.org/10.1002/jeab.318">https://doi.org/10.1002/jeab.318</a></p>
+            <p class="lead"><strong>Published:</strong><br>Gilroy, S. P., Franck, C. T. & Hantula, D. A. (2017). The discounting model selector: Statistical software for delay discounting applications. <i>Journal of the Experimental Analysis of Behavior, 107(3)</i>, 388-401. <a href="https://doi.org/10.1002/jeab.257">https://doi.org/10.1002/jeab.257</a></p>
+            <p class="lead">Franck, C. T., Koffarnus, M. N., House, L. L., & Bickel, W. K. (2015). Accurate characterization of delay discounting: a multiple model approach using approximate Bayesian model selection and a unified discounting measure. <i>Journal of the Experimental Analysis of Behavior, 103(1)</i>, 218-233. <a href="https://doi.org/10.1002/jeab.128">https://doi.org/10.1002/jeab.128</a></p>
+        </div>
+    </div>
+</div>
+<!--/.Header row-->
+
+<!--First row-->
+<div class="row">
+  <!--Info Panel-->
+  <div class="col-md-6">
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">Discounting Model Selection</h3>
+      </div>
+      <div class="panel-body">
+        <h3 class="post-title">Approximate Bayesian Model Selection</h3>
+
+        <p class="lead">This tool automates discounting model fitting, model comparison, model selection, and calculation of the Effective Delay 50 (ED50).</p>
+        <p class="lead">To perform model selection, input at least 3 pairs (x and y) of discounting data. At least three pairs of data are necessary to proceed.</p>
+        <p class="lead">Delay values (x) can be any number, though values must be between 0-1. This should be calculated as a proportion (i.e., the Y value divided by the Maximum Value). Any higher numbers will prevent you from proceeding.</p>
+
+        <br/>
+
+        <div class="read-more">
+          <a id="loadSampleBtn" class="btn btn-info btn-block btn-raised">Load Sample Data</a>
+        </div>
+
+        <br/>
+
+        <div id='sheet'></div>
+
+        <div class="form-group">
+          <label for="selectAcq" class="lead">Select Rachlin Behavior:</label>
+          <select class="form-control" id="selectBound" style="height: 100%;">
+            <option selected="selected">Do not Bound</option>
+            <option>Drop if s is greater than 1</option>
+          </select>
+        </div>
+
+        <a id="scoreBtn" class="btn btn-primary btn-block btn-raised">Fit Models</a>
+
+        <br/>
+
+        <p class="lead">The Discounting Model Fitter (<a href="https://github.com/miyamot0/DiscountingFitterTool">Source Code</a>) uses the following tools to function:</p>
+
+        <p class="lead"><a href="http://www.alglib.net/">ALGLIB</a> - <a href="http://www.alglib.net/download.php">GPLv2+ (GPL 3.0)</a></p>
+
+        <p class="lead"><a href="https://www.jquery.com/">Jquery</a> - <a href="https://raw.githubusercontent.com/jquery/jquery/master/LICENSE.txt">MIT Licensed</a></p>
+
+        <p class="lead"><a href="https://www.Handsontable.com/">Handsontable</a> - <a href="https://handsontable.com/static/licenses/v1/open-source-license.pdf?_ga=2.259947018.127668181.1494398112-1144048465.1493642801">MIT Licensed</a></p>
+
+        <p class="lead"><a href="https://www.chartjs.org/">Chart.js</a> - <a href="https://github.com/chartjs/Chart.js/blob/master/LICENSE.md">MIT Licensed</a></p>
+
+        </div>
+      </div>
+    </div>
+    <!--/.Info Panel-->
+
+    <!--Results Panel-->
+    <div class="col-md-6">
+        <div class="well">
+          <canvas id="chart" width="400" height="400" style="width: 400px; height: 400px; max-height: 400px;"></canvas>
+
+          <p id="csrf-token" style="display: none;">84836a70bd2d1ab069be559f29e80b99</p>
+
+          <h3 class="hiddenTitles" style="display: none;">Most Probable Model</h3>
+          <p id="modelRankOne" class="card-text clearHelper"></p>
+          <h3 class="hiddenTitles" style="display: none;">Second Most Probable Model</h3>
+          <p id="modelRankTwo" class="card-text clearHelper"></p>
+          <h3 class="hiddenTitles" style="display: none;">Third Most Probable Model</h3>
+          <p id="modelRankThree" class="card-text clearHelper"></p>
+          <h3 class="hiddenTitles" style="display: none;">Fourth Most Probable Model</h3>
+          <p id="modelRankFour" class="card-text clearHelper"></p>
+          <h3 class="hiddenTitles" style="display: none;">Fifth Most Probable Model</h3>
+          <p id="modelRankFive" class="card-text clearHelper"></p>
+          <h3 class="hiddenTitles" style="display: none;">Sixth Most Probable Model</h3>
+          <p id="modelRankSix" class="card-text clearHelper"></p>
+          <h3 class="hiddenTitles" style="display: none;">Seventh Most Probable Model</h3>
+          <p id="modelRankSeven" class="card-text clearHelper"></p>
+          <h3 class="hiddenTitles" style="display: none;">Eighth Most Probable Model</h3>
+          <p id="modelRankEight" class="card-text clearHelper"></p>
+          <h3 class="hiddenTitles" style="display: none;">Ninth Most Probable Model</h3>
+          <p id="modelRankNine" class="card-text clearHelper"></p>
+
+        </div>
+    </div>
+    <!--/.Results Panel-->
+</div>
+<!--/.First row-->
+
+<!-- Core Chart components -->
+<script src="js/Chart.min.js"></script>  
+
+<!-- Core Spreadsheet components -->
+<link href="css/handsontable.full.min.css" rel="stylesheet">
+<script src="js/handsontable.full.min.js"></script>
+
+<script>
+/*
+   Copyright 2017 Shawn Gilroy
+
+   This file is part of Discounting Model Selector, web port.
+
+   Discounting Model Selector is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, version 3.
+
+   Discounting Model Selector is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with Discounting Model Selector.  If not, see http://www.gnu.org/licenses/.
+*/
+
+  function getExponentialProjection(x, k)
+  {
+    return Math.exp(-Math.exp(k)*x);
+  }
+
+  function getHyperbolicProjection(x, k)
+  {
+    return Math.pow((1+Math.exp(k)*x), -1);
+  }
+
+  function getQuasiHyperbolicProjection(x, b, d)
+  {
+    return b * Math.pow(d, x);
+  }
+
+  function getMyersonProjection(x, k, s)
+  {
+    return Math.pow((1+Math.exp(k)*x), -s);
+  }
+
+  function getRachlinProjection(x, k, s)
+  {
+    return Math.pow((1+Math.exp(k)*Math.pow(x, s)), -1);
+  }
+
+  function getRodriguezLogueProjection(x, k, b)
+  {
+    return Math.pow((1 + x * Math.exp(k)),(-Math.exp(b) / Math.exp(k)));
+  }
+
+  function getEbertPrelecProjection(x, k, s)
+  {
+    return Math.exp(-Math.pow((Math.exp(k)*x),s));
+  }
+
+  function getbleichrodtProjection(x, k, s, beta)
+  {
+    return beta * Math.exp(-Math.exp(k)*Math.pow(x,s));
+  }
+
+  function getReference(i)
+  {
+    var mRef;
+
+    if (i == 0)
+    {
+      mRef = $("#modelRankOne");
+    }
+    else if (i == 1)
+    {
+      mRef = $("#modelRankTwo");
+    }
+    else if (i == 2)
+    {
+      mRef = $("#modelRankThree");
+    }
+    else if (i == 3)
+    {
+      mRef = $("#modelRankFour");
+    }
+    else if (i == 4)
+    {
+      mRef = $("#modelRankFive");
+    }
+    else if (i == 5)
+    {
+      mRef = $("#modelRankSix");
+    }
+    else if (i == 6)
+    {
+      mRef = $("#modelRankSeven");
+    }
+    else if (i == 7)
+    {
+      mRef = $("#modelRankEight");
+    }
+    else if (i == 8)
+    {
+      mRef = $("#modelRankNine");
+    }
+
+    return mRef;
+  }
+
+  function getNoise(obj, isTop)
+  {
+    var mReturn = "";
+    mReturn += "Noise Mean (c): " + obj.NoiseMean.toFixed(6) + "<br>";
+    mReturn += "Noise AIC: " + obj.NoiseAIC.toFixed(6) + "<br>";
+    mReturn += "Noise BIC: " + obj.NoiseBIC.toFixed(6) + "<br>";
+    mReturn += "Noise RMS error: " + obj.NoiseRMS.toFixed(6) + "<br>";
+    mReturn += "Noise avg error: " + obj.Noiseavgerr.toFixed(6) + "<br>";
+    mReturn += "<b>Noise Probability: " + obj.NoiseProb.toFixed(6) + "</b><br>";
+
+    if (isTop)
+    {
+      mReturn += "<b>Noise Area (Natural): " + obj.ProbableArea.toFixed(6) + "</b><br>";
+      mReturn += "<b>Noise Area (Log10 Scale): " + obj.ProbableAreaLog10.toFixed(6) + "</b><br>";
+    }
+
+    return mReturn;
+  }
+
+  function ExponentialED50(k)
+  {
+      return Math.log(Math.log(2) / Math.exp(k));
+  }
+
+  function getExponential(obj, isTop)
+  {
+    var mReturn = "";
+    mReturn += "Exponential (k): " + Math.exp(obj.Exponential).toFixed(6) + "<br>";
+    mReturn += "Exponential AIC: " + obj.ExponentialAIC.toFixed(6) + "<br>";
+    mReturn += "Exponential BIC: " + obj.ExponentialBIC.toFixed(6) + "<br>";
+    mReturn += "Exponential RMS error: " + obj.ExponentialRMS.toFixed(6) + "<br>";
+    mReturn += "Exponential avg error: " + obj.Exponentialavgerr.toFixed(6) + "<br>";
+    mReturn += "<b>Exponential Probability: " + obj.ExponentialProb.toFixed(6) + "</b><br>";
+
+    if (isTop)
+    {
+      mReturn += "<b>Exponential ED50: " + obj.ProbableED50.toFixed(6) + "</b><br>";
+      mReturn += "<b>Exponential Area (Natural): " + obj.ProbableArea.toFixed(6) + "</b><br>";
+      mReturn += "<b>Exponential Area (Log10 Scale): " + obj.ProbableAreaLog10.toFixed(6) + "</b><br>";
+    }
+
+    return mReturn;
+  }
+
+  function HyperbolicED50(k)
+  {
+      return Math.log(1.0 / Math.exp(k));
+  }
+
+  function getHyperbolic(obj, isTop)
+  {
+    var mReturn = "";
+    mReturn += "Hyperbolic (k): " + Math.exp(obj.Hyperbolic).toFixed(6) + "<br>";
+    mReturn += "Hyperbolic AIC: " + obj.HyperbolicAIC.toFixed(6) + "<br>";
+    mReturn += "Hyperbolic BIC: " + obj.HyperbolicBIC.toFixed(6) + "<br>";
+    mReturn += "Hyperbolic RMS error: " + obj.HyperbolicRMS.toFixed(6) + "<br>";
+    mReturn += "Hyperbolic avg error: " + obj.Hyperbolicavgerr.toFixed(6) + "<br>";
+    mReturn += "<b>Hyperbolic Probability: " + obj.HyperbolicProb.toFixed(6) + "</b><br>";
+
+    if (isTop)
+    {
+      mReturn += "<b>Hyperbolic ED50: " + obj.ProbableED50.toFixed(6) + "</b><br>";
+      mReturn += "<b>Hyperbolic Area (Natural): " + obj.ProbableArea.toFixed(6) + "</b><br>";
+      mReturn += "<b>Hyperbolic Area (Log10 Scale): " + obj.ProbableAreaLog10.toFixed(6) + "</b><br>";
+    }
+
+    return mReturn;
+  }
+
+  function QuasiHyperbolicED50(b, d)
+  {
+      return Math.log(Math.log((1.0 / (2 * b)), d));
+  }
+
+  function getQuasiHyperbolic(obj, isTop)
+  {
+    var mReturn = "";
+    mReturn += "Quasi Hyperbolic (b): " + obj.QuasiHyperbolicBeta.toFixed(6) + "<br>";
+    mReturn += "Quasi Hyperbolic (d): " + obj.QuasiHyperbolicDelta.toFixed(6) + "<br>";
+    mReturn += "Quasi Hyperbolic AIC: " + obj.QuasiHyperbolicAIC.toFixed(6) + "<br>";
+    mReturn += "Quasi Hyperbolic BIC: " + obj.QuasiHyperbolicBIC.toFixed(6) + "<br>";
+    mReturn += "Quasi Hyperbolic RMS error: " + obj.QuasiHyperbolicRMS.toFixed(6) + "<br>";
+    mReturn += "Quasi Hyperbolic avg error: " + obj.QuasiHyperbolicavgerr.toFixed(6) + "<br>";
+    mReturn += "<b>Quasi Hyperbolic Probability: " + obj.QuasiHyperbolicProb.toFixed(6) + "</b><br>";
+
+    if (isTop)
+    {
+      mReturn += "<b>Quasi Hyperbolic ED50: " + obj.ProbableED50.toFixed(6) + "</b><br>";
+      mReturn += "<b>Quasi Hyperbolic Area (Natural): " + obj.ProbableArea.toFixed(6) + "</b><br>";
+      mReturn += "<b>Quasi Hyperbolic Area (Log10 Scale): " + obj.ProbableAreaLog10.toFixed(6) + "</b><br>";
+    }
+
+    return mReturn;
+  }
+
+  function RachlinED50(k, s)
+  {
+      return Math.log(Math.pow((1.0 / (Math.exp(k))), (1 / s)));
+  }
+
+  function getRachlin(obj, isTop)
+  {
+    var mReturn = "";
+    mReturn += "Rachlin (k): " + Math.exp(obj.RachlinK).toFixed(6) + "<br>";
+    mReturn += "Rachlin (s): " + obj.RachlinS.toFixed(6) + "<br>";
+    mReturn += "Rachlin AIC: " + obj.RachlinAIC.toFixed(6) + "<br>";
+    mReturn += "Rachlin BIC: " + obj.RachlinBIC.toFixed(6) + "<br>";
+    mReturn += "Rachlin RMS error: " + obj.RachlinRMS.toFixed(6) + "<br>";
+    mReturn += "Rachlin avg error: " + obj.Rachlinavgerr.toFixed(6) + "<br>";
+    mReturn += "<b>Rachlin Probability: " + obj.RachlinProb.toFixed(6) + "</b><br>";
+
+    if (isTop)
+    {
+      mReturn += "<b>Rachlin ED50: " + obj.ProbableED50.toFixed(6) + "</b><br>";
+      mReturn += "<b>Rachlin Area (Natural): " + obj.ProbableArea.toFixed(6) + "</b><br>";
+      mReturn += "<b>Rachlin Area (Log10 Scale): " + obj.ProbableAreaLog10.toFixed(6) + "</b><br>";
+    }
+
+    return mReturn;
+  }
+
+  function MyersonED50(k, s)
+  {
+      return Math.log((Math.pow(2, (1.0 / s)) - 1.0) / Math.exp(k));
+  }
+
+  function getMyerson(obj, isTop)
+  {
+    var mReturn = "";
+    mReturn += "Myerson (k): " + Math.exp(obj.MyersonK).toFixed(6) + "<br>";
+    mReturn += "Myerson (s): " + obj.MyersonS.toFixed(6) + "<br>";
+    mReturn += "Myerson AIC: " + obj.MyersonAIC.toFixed(6) + "<br>";
+    mReturn += "Myerson BIC: " + obj.MyersonBIC.toFixed(6) + "<br>";
+    mReturn += "Myerson RMS error: " + obj.MyersonRMS.toFixed(6) + "<br>";
+    mReturn += "Myerson avg error: " + obj.Myersonavgerr.toFixed(6) + "<br>";
+    mReturn += "<b>Myerson Probability: " + obj.MyersonProb.toFixed(6) + "</b><br>";
+
+    if (isTop)
+    {
+      mReturn += "<b>Myerson ED50: " + obj.ProbableED50.toFixed(6) + "</b><br>";
+      mReturn += "<b>Myerson Area (Natural): " + obj.ProbableArea.toFixed(6) + "</b><br>";
+      mReturn += "<b>Myerson Area (Log10 Scale): " + obj.ProbableAreaLog10.toFixed(6) + "</b><br>";
+    }
+
+    return mReturn;
+  }
+
+  function getRodriguezLogue(obj, isTop)
+  {
+    var mReturn = "";
+    mReturn += "Loewenstein & Prelec (k): " + Math.exp(obj.RodriguezLogueK).toFixed(6) + "<br>";
+    mReturn += "Loewenstein & Prelec (b): " + Math.exp(obj.RodriguezLogueBeta).toFixed(6) + "<br>";
+    mReturn += "Loewenstein & Prelec AIC: " + obj.RodriguezLogueAIC.toFixed(6) + "<br>";
+    mReturn += "Loewenstein & Prelec BIC: " + obj.RodriguezLogueBIC.toFixed(6) + "<br>";
+    mReturn += "Loewenstein & Prelec RMS error: " + obj.RodriguezLogueRMS.toFixed(6) + "<br>";
+    mReturn += "Loewenstein & Prelec avg error: " + obj.RodriguezLogueavgerr.toFixed(6) + "<br>";
+    mReturn += "<b>Loewenstein & Prelec Probability: " + obj.RodriguezLogueProb.toFixed(6) + "</b><br>";
+
+    if (isTop)
+    {
+      mReturn += "<b>Loewenstein & Prelec ln(ED50): " + obj.ProbableED50.toFixed(6) + "</b><br>";
+      mReturn += "<b>Loewenstein & Prelec Area (Natural): " + obj.ProbableArea.toFixed(6) + "</b><br>";
+      mReturn += "<b>Loewenstein & Prelec Area (Log10 Scale): " + obj.ProbableAreaLog10.toFixed(6) + "</b><br>";
+    }
+
+    return mReturn;    
+  }
+
+  function getEbertPrelec(obj, isTop)
+  {
+    var mReturn = "";
+    mReturn += "Ebert & Prelec (k): " + Math.exp(obj.EbertPrelecK).toFixed(6) + "<br>";
+    mReturn += "Ebert & Prelec (s): " + obj.EbertPrelecS.toFixed(6) + "<br>";
+    mReturn += "Ebert & Prelec AIC: " + obj.EbertPrelecAIC.toFixed(6) + "<br>";
+    mReturn += "Ebert & Prelec BIC: " + obj.EbertPrelecBIC.toFixed(6) + "<br>";
+    mReturn += "Ebert & Prelec RMS error: " + obj.EbertPrelecRMS.toFixed(6) + "<br>";
+    mReturn += "Ebert & Prelec avg error: " + obj.EbertPrelecavgerr.toFixed(6) + "<br>";
+    mReturn += "<b>Ebert & Prelec Probability: " + obj.EbertPrelecProb.toFixed(6) + "</b><br>";
+
+    if (isTop)
+    {
+      mReturn += "<b>Ebert & Prelec ln(ED50): " + obj.ProbableED50.toFixed(6) + "</b><br>";
+      mReturn += "<b>Ebert & Prelec Area (Natural): " + obj.ProbableArea.toFixed(6) + "</b><br>";
+      mReturn += "<b>Ebert & Prelec Area (Log10 Scale): " + obj.ProbableAreaLog10.toFixed(6) + "</b><br>";
+    }
+
+    return mReturn;    
+  }
+
+  function getBleichrodt(obj, isTop)
+  {
+    var mReturn = "";
+    mReturn += "Bleichrodt et al. (b): " + obj.BleichrodtBeta.toFixed(6) + "<br>";
+    mReturn += "Bleichrodt et al. (k): " + Math.exp(obj.BleichrodtK).toFixed(6) + "<br>";
+    mReturn += "Bleichrodt et al. (s): " + obj.BleichrodtS.toFixed(6) + "<br>";
+    mReturn += "Bleichrodt et al. AIC: " + obj.BleichrodtAIC.toFixed(6) + "<br>";
+    mReturn += "Bleichrodt et al. BIC: " + obj.BleichrodtBIC.toFixed(6) + "<br>";
+    mReturn += "Bleichrodt et al. RMS error: " + obj.BleichrodtRMS.toFixed(6) + "<br>";
+    mReturn += "Bleichrodt et al. avg error: " + obj.Bleichrodtavgerr.toFixed(6) + "<br>";
+    mReturn += "<b>Bleichrodt et al. Probability: " + obj.BleichrodtProb.toFixed(6) + "</b><br>";
+
+    if (isTop)
+    {
+      mReturn += "<b>Bleichrodt et al. ln(ED50): " + obj.ProbableED50.toFixed(6) + "</b><br>";
+      mReturn += "<b>Bleichrodt Area (Natural): " + obj.ProbableArea.toFixed(6) + "</b><br>";
+      mReturn += "<b>Bleichrodt Area (Log10 Scale): " + obj.ProbableAreaLog10.toFixed(6) + "</b><br>";
+    }
+
+    return mReturn;    
+  }
+
+  function getHeadingContent(obj, model, i)
+  {
+    var mRef = getReference(i);
+
+    var isTop = false;
+
+    if (i == 0)
+    {
+      isTop = true;
+    }
+
+    if (model == "Noise")
+    {
+      mRef.html(getNoise(obj, isTop));
+    }
+    else if (model == "Exponential")
+    {
+      mRef.html(getExponential(obj, isTop));
+    }
+    else if (model == "Hyperbolic")
+    {
+      mRef.html(getHyperbolic(obj, isTop));
+    }
+    else if (model == "QuasiHyperbolic")
+    {
+      mRef.html(getQuasiHyperbolic(obj, isTop));
+    }
+    else if (model == "Myerson")
+    {
+      mRef.html(getMyerson(obj, isTop));
+    }
+    else if (model == "Rachlin")
+    {
+      mRef.html(getRachlin(obj, isTop));
+    }
+    else if (model == "RodriguezLogue")
+    {
+      mRef.html(getRodriguezLogue(obj, isTop));
+    }
+    else if (model == "EbertPrelec")
+    {
+      mRef.html(getEbertPrelec(obj, isTop));
+    }
+    else if (model == "Bleichrodt")
+    {
+      mRef.html(getBleichrodt(obj, isTop));
+    }
+  }
+
+  function clearChart()
+  {
+      window.myChart.data.datasets = 
+      [
+      {
+              label: 'Noise',
+              data: [],
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(190,128,255,1)",
+              borderColor: "rgba(190,128,255,1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderWidth: 1,
+              borderJoinStyle: 'miter',
+              pointBorderWidth: 0,
+              pointHoverRadius: 0,
+              pointHoverBackgroundColor: "rgba(0,0,0,0)",
+              pointHoverBorderColor: "rgba(0,0,0,0)",
+              pointHoverBorderWidth: 0,
+      },
+      {
+              label: 'Exponential',
+              data: [],
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(12,21,42,1)",
+              borderColor: "rgba(12,21,42,1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderWidth: 1,
+              borderJoinStyle: 'miter',
+              pointBorderWidth: 0,
+              pointHoverRadius: 0,
+              pointHoverBackgroundColor: "rgba(0,0,0,0)",
+              pointHoverBorderColor: "rgba(0,0,0,0)",
+              pointHoverBorderWidth: 0,
+      },
+      {
+              label: 'Hyperbolic',
+              data: [],
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(152,36,56,1)",
+              borderColor: "rgba(152,36,56,1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderWidth: 1,
+              borderJoinStyle: 'miter',
+              pointBorderWidth: 0,
+              pointHoverRadius: 0,
+              pointHoverBackgroundColor: "rgba(0,0,0,0)",
+              pointHoverBorderColor: "rgba(0,0,0,0)",
+              pointHoverBorderWidth: 0,
+      },
+      {
+              label: 'Quasi-Hyperbolic',
+              data: [],
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(235,84,10,1)",
+              borderColor: "rgba(235,84,10,1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderWidth: 1,
+              borderJoinStyle: 'miter',
+              pointBorderWidth: 0,
+              pointHoverRadius: 0,
+              pointHoverBackgroundColor: "rgba(0,0,0,0)",
+              pointHoverBorderColor: "rgba(0,0,0,0)",
+              pointHoverBorderWidth: 0,
+      },
+      {
+              label: 'Green-Myerson',
+              data: [],
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(50,124,203,1)",
+              borderColor: "rgba(50,124,203,1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderWidth: 1,
+              borderJoinStyle: 'miter',
+              pointBorderWidth: 0,
+              pointHoverRadius: 0,
+              pointHoverBackgroundColor: "rgba(0,0,0,0)",
+              pointHoverBorderColor: "rgba(0,0,0,0)",
+              pointHoverBorderWidth: 0,
+      },
+      {
+              label: 'Rachlin',
+              data: [],
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(20,182,148,1)",
+              borderColor: "rgba(20,182,148,1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderWidth: 1,
+              borderJoinStyle: 'miter',
+              pointBorderWidth: 0,
+              pointHoverRadius: 0,
+              pointHoverBackgroundColor: "rgba(0,0,0,0)",
+              pointHoverBorderColor: "rgba(0,0,0,0)",
+              pointHoverBorderWidth: 0,
+      },
+      {
+              label: 'Loewenstein-Prelec',
+              data: [],
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(67,162,202,1)",
+              borderColor: "rgba(67,162,202,1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderWidth: 1,
+              borderJoinStyle: 'miter',
+              pointBorderWidth: 0,
+              pointHoverRadius: 0,
+              pointHoverBackgroundColor: "rgba(0,0,0,0)",
+              pointHoverBorderColor: "rgba(0,0,0,0)",
+              pointHoverBorderWidth: 0,
+      },
+      {
+              label: 'Ebert-Prelec',
+              data: [],
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(255,237,160,1)",
+              borderColor: "rgba(255,237,160,1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderWidth: 1,
+              borderJoinStyle: 'miter',
+              pointBorderWidth: 0,
+              pointHoverRadius: 0,
+              pointHoverBackgroundColor: "rgba(0,0,0,0)",
+              pointHoverBorderColor: "rgba(0,0,0,0)",
+              pointHoverBorderWidth: 0,
+      },
+      {
+              label: 'Bleichrodt et al.',
+              data: [],
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(44,162,95,1)",
+              borderColor: "rgba(44,162,95,1)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderWidth: 1,
+              borderJoinStyle: 'miter',
+              pointBorderWidth: 0,
+              pointHoverRadius: 0,
+              pointHoverBackgroundColor: "rgba(0,0,0,0)",
+              pointHoverBorderColor: "rgba(0,0,0,0)",
+              pointHoverBorderWidth: 0,
+      },
+      {
+              label: 'Raw Data',
+              data: [],
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(0,0,0,1)",
+              borderColor: "rgba(0,0,0,0)",
+              borderCapStyle: 'butt',
+              borderDash: [],
+              borderDashOffset: 0.0,
+              borderWidth: 1,
+              borderJoinStyle: 'miter',
+              pointBorderColor: "rgba(0,0,0,1)",
+              pointBackgroundColor: "#000",
+              pointBorderWidth: 1,
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "rgba(0,0,0,1)",
+              pointHoverBorderColor: "rgba(0,0,0,1)",
+              pointHoverBorderWidth: 2,
+              pointRadius: 5,
+              pointHitRadius: 10,
+              spanGaps: false
+      }
+      ];
+
+      window.myChart.options.scales.xAxes["0"].gridLines.display = false;
+      window.myChart.options.scales.yAxes["0"].gridLines.display = false;       
+
+      window.myChart.update(50, true);
+  }
+
+  function loadUpResources()
+  {
+    var ctx = document.getElementById('chart').getContext('2d');
+
+    Chart.defaults.global.defaultFontColor='black';
+
+    window.myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            datasets: []
+        },
+        responsive: false,
+        maintainAspectRatio: true,
+        options: {
+            layout: {
+              padding: {
+                top: 5
+              }
+            },
+            scaleFontColor: 'black',
+            legend: {
+                position: 'bottom',
+            },
+            title: {
+                display: true,
+                text: 'Discounting Model Selection',
+                fontColor: "black"
+            },
+            scales: {
+                  xAxes: [{
+                    titleFontColor: "black",
+                    scaleLabel: {
+                      display: true,
+                      labelString: 'Delay'
+                    },
+                    type: 'logarithmic',
+                    position: 'bottom',
+                    scaleLineColor: "black",
+                    gridLines: { 
+                      color: "#000000" 
+                    },
+                    ticks: {      
+                      maxRotation: 90,
+                      minRotation: 90,
+                      callback: function(value, index, values) {
+                        var mValue = value.toString();
+
+                        var isValid = /^[01]*$/.test(mValue);
+
+                        if (isValid)
+                        {
+                          return Number(mValue);
+                        }
+                        else
+                        {
+                          return null;
+                        }                          
+                      }
+                    }
+                }],
+                yAxes: [{
+                  display: true,
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Value',
+                  },
+                  ticks: {
+                      beginAtZero: true,
+                      steps: 10,
+                      stepValue: 0.1,
+                      fontColor: "black",
+                      max: 1
+                  },
+                  scaleLineColor: "black",
+                  gridLines: { 
+                    color: "#000000" 
+                  }
+              }]
+            },            
+            showTooltips: false,
+            elements: { 
+              point: { 
+                radius: 0 
+              },
+              line: {
+                borderWidth: 0
+              } 
+            },
+            maintainAspectRatio: false
+        }
+    });
+
+    $(document).ready(function () {
+      $( "#scoreBtn" ).on('click', function()
+      {
+
+        clearChart();
+
+        var thing = $('#sheet').handsontable('getData');
+
+        var mX = [];
+        var mY = [];
+
+        var mFinalDelay = -1;
+
+        for (var i=0; i<thing.length; i++)
+        {
+          var temp = thing[i];
+
+          if ($.isNumeric(parseFloat(temp[0])) && $.isNumeric(parseFloat(temp[1])))
+          {
+            if (parseFloat(temp[0]) < 0)
+            {
+               alert('Please enter positive delay points.');
+               return;
+            }
+            
+            if (parseFloat(temp[1]) > 1)
+            {
+               alert('Please enter value points within 0-1.');
+               return;
+            }
+
+            if (parseFloat(temp[0]) > mFinalDelay)
+            {
+              mFinalDelay = parseFloat(temp[0]);
+            }
+
+            mX.push('[' + temp[0].toString() + ']');
+            mY.push(temp[1]);
+          }
+        }
+
+        if (mX.length < 3 || mY.length < 3)
+        {
+          alert('Not enough data was entered');
+          return;
+        }      
+
+        var mBoundString = "false";
+
+        if ($("#selectBound").prop('selectedIndex') == 1)
+        {
+          mBoundString = "true";
+        }
+
+        var mSenderX = '[' + mX.join(',') + ']';
+        var mSenderY = '[' + mY.join(',') + ']';
+
+        $.ajax(
+        {
+          type: 'POST',
+          url: window.location.pathname,
+          data:
+          {
+             "xValueString" : mSenderX,
+             "yValueString" : mSenderY,
+             "rachlinBound" : mBoundString,
+             "Method" : "modelselection",
+             "CSRF" : $('#csrf-token').text()
+          },
+          beforeSend: function()
+          {
+            $('p.clearHelper').empty();
+            $('h4.hiddenTitles').hide();       
+
+            $('#scoreBtn').attr("disabled","disabled");
+            $('#scoreBtn').text("Please Wait...");
+          },
+          success: function(data)
+          {
+            var mResult = JSON.parse(data);
+
+            $('#csrf-token').text(mResult.CSRF);
+
+            var mResultString = mResult.result;
+            mResultString = mResultString.replace(/(\r\n|\n|\r)/gm,"");
+
+            var mFigure = JSON.parse(mResultString);
+            var mFigures = JSON.parse(mFigure);
+
+            $(".hiddenTitles").show();
+
+            mPoints = [];
+
+            mNoise = [];
+            mExponential = [];
+            mHyperbolic = [];
+            mQuasiHyperbolic = [];
+            mMyerson = [];
+            mRachlin = [];
+
+            var mDelays = mX;
+
+            var mValues = mY;
+            var mValuesY = [];
+
+            var mPointsObject = {};
+            mPointsObject.label = "Raw Data";
+            mPointsObject.data = new Array();
+
+            for (var i=0; i<mValues.length; i++)
+            {
+              window.myChart.data.datasets[9].data.push({x: parseFloat(mDelays[i].slice(1, -1)), y: parseFloat(mValues[i])});
+              mValuesY.push(parseFloat(mValues[i]));
+            }
+
+            var modelProbabilities = new Array();            
+
+            if ($.isNumeric(mFigures.NoiseBIC))
+            {
+              modelProbabilities.push({name: 'Noise', val: mFigures.NoiseProb});
+            }
+
+            if ($.isNumeric(mFigures.HyperbolicBIC))
+            {
+              modelProbabilities.push({name: 'Hyperbolic', val: mFigures.HyperbolicProb});
+            }
+
+            if ($.isNumeric(mFigures.ExponentialBIC))
+            {
+              modelProbabilities.push({name: 'Exponential', val: mFigures.ExponentialProb});
+            }
+
+            if ($.isNumeric(mFigures.QuasiHyperbolicBIC))
+            {
+              modelProbabilities.push({name: 'QuasiHyperbolic', val: mFigures.QuasiHyperbolicProb});
+            }
+
+            if ($.isNumeric(mFigures.MyersonBIC))
+            {
+              modelProbabilities.push({name: 'Myerson', val: mFigures.MyersonProb});
+            }
+            if ($.isNumeric(mFigures.RachlinBIC))
+            {
+              if (mBoundString == "true" && mFigures.RachlinS > 1)
+              {
+
+              }
+              else
+              { 
+                modelProbabilities.push({name: 'Rachlin', val: mFigures.RachlinProb});
+              }              
+            }
+
+            if ($.isNumeric(mFigures.RodriguezLogueBIC))
+            {
+              modelProbabilities.push({name: 'RodriguezLogue', val: mFigures.RodriguezLogueProb});
+            }
+
+            if ($.isNumeric(mFigures.EbertPrelecBIC))
+            {
+              modelProbabilities.push({name: 'EbertPrelec', val: mFigures.EbertPrelecProb});
+            }
+
+            if ($.isNumeric(mFigures.BleichrodtBIC))
+            {
+              modelProbabilities.push({name: 'Bleichrodt', val: mFigures.BleichrodtProb});
+            }
+
+            modelProbabilities.sort(function(a,b) {
+                return a.val - b.val;
+            });
+
+            modelProbabilities.reverse();
+
+            var plotLast = false;
+
+            var average = null;
+
+            if ($.isNumeric(mFigures.NoiseMean))
+            {
+              average = parseFloat(mFigures.NoiseMean);
+            }
+
+            //i++
+            for (var i=1; i <= mFinalDelay; )
+            {
+
+              window.myChart.data.datasets[0].data.push({x: i, y: average});
+              window.myChart.data.datasets[1].data.push({x: i, y: getExponentialProjection(i, mFigures.Exponential)});
+              window.myChart.data.datasets[2].data.push({x: i, y: getHyperbolicProjection(i, mFigures.Hyperbolic)});
+              window.myChart.data.datasets[3].data.push({x: i, y: getQuasiHyperbolicProjection(i, mFigures.QuasiHyperbolicBeta, mFigures.QuasiHyperbolicDelta)});
+              window.myChart.data.datasets[4].data.push({x: i, y: getMyersonProjection(i, mFigures.MyersonK, mFigures.MyersonS)});
+
+              mExponential.push([i, getExponentialProjection(i, mFigures.Exponential)]);
+              mHyperbolic.push([i, getHyperbolicProjection(i, mFigures.Hyperbolic)]);
+              mQuasiHyperbolic.push([i, getQuasiHyperbolicProjection(i, mFigures.QuasiHyperbolicBeta, mFigures.QuasiHyperbolicDelta)]);
+              mMyerson.push([i, getMyersonProjection(i, mFigures.MyersonK, mFigures.MyersonS)]);
+
+              if (mBoundString == "true" && mFigures.RachlinS > 1)
+              {
+              }
+              else
+              {
+                if ($.isNumeric(mFigures.RachlinBIC))
+                {
+                  window.myChart.data.datasets[5].data.push({x: i, y: getRachlinProjection(i, mFigures.RachlinK, mFigures.RachlinS)});
+                  mRachlin.push([i, getRachlinProjection(i, mFigures.RachlinK, mFigures.RachlinS)]);
+                }
+              }
+
+              window.myChart.data.datasets[6].data.push({x: i, y: getRodriguezLogueProjection(i, mFigures.RodriguezLogueK, mFigures.RodriguezLogueBeta)});
+              window.myChart.data.datasets[7].data.push({x: i, y: getEbertPrelecProjection(i, mFigures.EbertPrelecK, mFigures.EbertPrelecS)});
+              window.myChart.data.datasets[8].data.push({x: i, y: getbleichrodtProjection(i, mFigures.BleichrodtK, mFigures.BleichrodtS, mFigures.BleichrodtBeta)});
+
+              //ebert here
+              //bleich.. here
+
+              if (i > 0 && i <= 10)
+              {
+                i = i + 1;
+              }
+              else if (i > 10 && i <= 100)
+              {
+                i = i + 10;
+              }
+              else if (i > 100 && i <= 1000)
+              {
+                i = i + 100;
+              }
+              else if (i > 1000 && i <= 10000)
+              {
+                i = i + 1000;
+              }
+              else if (i > 10000 && i <= 100000)
+              {
+                i = i + 10000;
+              }
+              else if (i > 100000 && i <= 1000000)
+              {
+                i = i + 100000;
+              }
+              else if (i > 1000000 && i <= 10000000)
+              {
+                i = i + 1000000;
+              }
+
+              if (plotLast)
+              {
+                i = mFinalDelay + 1;
+              }
+              else if (i > mFinalDelay)
+              {
+                i = mFinalDelay;
+                plotLast = true;
+              }
+            }
+
+            var modelFactors = [];
+
+            window.myChart.update();
+
+            for(var i=0; i<modelProbabilities.length; i++)
+            {
+              getHeadingContent(mFigures, modelProbabilities[i].name, i);
+            }
+
+          },
+          complete: function()
+          {
+              $('h4.hiddenTitles').show();
+              $('#scoreBtn').removeAttr('disabled');
+              $('#scoreBtn').text("Fit Models");
+
+              if (ga != null)
+              {
+                ga('send', {
+                  hitType: 'event',
+                  eventCategory: 'DMSWeb',
+                  eventAction: 'Model Selection'
+                });
+              }
+          }
+        });
+      });
+
+      $( "#loadSampleBtn" ).on('click', function()
+      {
+          $('#sheet').handsontable('setDataAtCell', 0, 0, "1");
+          $('#sheet').handsontable('setDataAtCell', 1, 0, "30");
+          $('#sheet').handsontable('setDataAtCell', 2, 0, "180");
+          $('#sheet').handsontable('setDataAtCell', 3, 0, "540");
+          $('#sheet').handsontable('setDataAtCell', 4, 0, "1080");
+          $('#sheet').handsontable('setDataAtCell', 5, 0, "2160");
+          $('#sheet').handsontable('setDataAtCell', 6, 0, "4320");
+          $('#sheet').handsontable('setDataAtCell', 7, 0, "8640");
+          $('#sheet').handsontable('setDataAtCell', 8, 0, "17280");
+
+          $('#sheet').handsontable('setDataAtCell', 0, 1, "1.0");
+          $('#sheet').handsontable('setDataAtCell', 1, 1, "0.9");
+          $('#sheet').handsontable('setDataAtCell', 2, 1, "0.8");
+          $('#sheet').handsontable('setDataAtCell', 3, 1, "0.7");
+          $('#sheet').handsontable('setDataAtCell', 4, 1, "0.6");
+          $('#sheet').handsontable('setDataAtCell', 5, 1, "0.5");
+          $('#sheet').handsontable('setDataAtCell', 6, 1, "0.4");
+          $('#sheet').handsontable('setDataAtCell', 7, 1, "0.3");
+          $('#sheet').handsontable('setDataAtCell', 8, 1, "0.2");
+      });
+
+      $('#sheet').handsontable(
+      {
+          data: [["",""],["",""],["",""],
+          ["",""],["",""],["",""],
+          ["",""],["",""],["",""]],
+          colHeaders: ['Delays', 'Values'],
+          rowHeaders: false,
+          stretchH: 'all',
+          columnSorting: false,
+          columns: [
+            {data: 0, type: 'text'},
+            {data: 1, type: 'text'}
+          ],
+          contextMenu: true
+      });
+    });
+  }
+
+  window.addEventListener('load', loadUpResources(), true);
+</script>
