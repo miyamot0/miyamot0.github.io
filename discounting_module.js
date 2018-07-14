@@ -1510,7 +1510,9 @@ function integrateWasmJS() {
     // if we don't have the binary yet, and have the Fetch api, use that
     // in some environments, like Electron's render process, Fetch api may be present, but have a different context than expected, let's only use it on the Web
     if (!Module['wasmBinary'] && (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) && typeof fetch === 'function') {
-      return fetch(wasmBinaryFile, { credentials: 'no-cors' }).then(function(response) {
+      return fetch(wasmBinaryFile, 
+        { 
+          mode: "no-cors" }).then(function(response) {
         if (!response['ok']) {
           throw "failed to load wasm binary file at '" + wasmBinaryFile + "'";
         }
@@ -1595,7 +1597,7 @@ function integrateWasmJS() {
         typeof WebAssembly.instantiateStreaming === 'function' &&
         !isDataURI(wasmBinaryFile) &&
         typeof fetch === 'function') {
-      WebAssembly.instantiateStreaming(fetch(wasmBinaryFile, { credentials: 'no-cors' }), info)
+      WebAssembly.instantiateStreaming(fetch(wasmBinaryFile, { mode: "no-cors" }), info)
         .then(receiveInstantiatedSource)
         .catch(function(reason) {
           // We expect the most common failure cause to be a bad MIME type for the binary,
