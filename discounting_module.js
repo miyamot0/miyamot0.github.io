@@ -1437,7 +1437,9 @@ function integrateWasmJS() {
   var method = 'native-wasm';
 
   var wasmTextFile = 'discounting_module.wast';
-  var wasmBinaryFile = 'discounting_module.wasm';
+  var wasmBinaryFile = 'https://github.com/miyamot0/miyamot0.github.io/blob/master/discounting_module.wasm?raw=true';
+
+  //'discounting_module.wasm';
   var asmjsCodeFile = 'discounting_module.temp.asm.js';
 
   if (typeof Module['locateFile'] === 'function') {
