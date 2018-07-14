@@ -1257,3 +1257,24 @@ function fireTest()
 
   window.addEventListener('load', loadUpResources(), true);
 </script>
+
+<script>
+var Module = 
+{
+  onRuntimeInitialized: function() 
+  {
+    var xValues = [1, 30, 180, 540, 1080, 2160, 4320, 8640, 17280];
+    var yValues = [1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2];
+
+    var obj = Module.DE("1, 30, 180, 540, 1080, 2160, 4320, 8640, 17280", 
+                        "1.0, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2");
+
+    console.log(obj);
+
+    var results = JSON.parse(obj);
+
+    console.log(results);
+  }    
+};
+</script>
+<script src="js/discounting_module.js"></script>
