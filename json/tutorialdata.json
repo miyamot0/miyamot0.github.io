@@ -1,0 +1,230 @@
+[
+  {
+    "Name" : "Mobile Application Tutorial",
+    "Summary" : "This application is an intermediate-level tutorial for users who have interest in seeing how a cross platform mobile application is put together. This is eschewed in the context of making an application to serve as either a clinical/research apparatus that creates vocal output. As this project stands, it serves as an application that could easily be incorporated into a functional communication treatment.",
+    "Tutorials" : [
+      {
+        "Index" : 1,
+        "Title" : "Initial Installation",
+        "Summary" : "In this initial video, we will be reviewing the process of downloading and installing Microsoft Visual Studio and the Xamarin platform. Microsoft only recently acquired Xamarin and open-sourced it, which is a huge deal. Before Xamarin, programs you wrote in Visual Studio could only be run on Windows Phone. With Xamarin, the programs you write in Visual Studio can be run on Apple and Android phones, tablets, etc. This means that if you write your programs well, your programs can be run almost anywhere in their native state. This means its fast, quick, and looks/behaves as it should.",
+        "Video" : "https://www.youtube.com/embed/n5A9Abv64dA"
+      },
+      {
+        "Index" : 2,
+        "Title" : "Interacting with Visual Studio",
+        "Summary" : "In this video, we begin to interact with Visual Studio. We mainly orient to file options/start list/recents list and customize the interface a bit. Users are encouraged to replicate the same behavior from this video on their own machine before moving forward.",
+        "Video" : "https://www.youtube.com/embed/aOEGUtJgir4"
+      },
+      {
+        "Index" : 3,
+        "Title" : "Creating our first project (Xamarin Portable App Project)",
+        "Summary" : "In this video, we launch Visual Studio and create a new project. We select Visual C# as the language to use and select a cross-platform project type. We review Xaml vs C# app format and proceed with C# app project type. We name the project and specify a location for where to save the project. Project source available at <a href='https://github.com/miyamot0/MobileApplicationTutorial_Video_003/'>https://github.com/miyamot0/MobileApplicationTutorial_Video_003/</a>",
+        "Video" : "https://www.youtube.com/embed/ZTOl9eNuQYI"
+      },
+      {
+        "Index" : 4,
+        "Title" : "Creating and Launching the Emulator",
+        "Summary" : "In this tutorial we launch visual studio, pull up our current project, and create an emulator. We navigate to the Android Virtual Device (AVD) manager to create an emulator and then start it up. Once we start it up, we inspect visual studio to see if the emulator is recognized by the program. Once loaded up in visual studio, the virtual device/emulator is ready to have applications deployed to it.",
+        "Video" : "https://www.youtube.com/embed/uaAVDUJRvsY"
+      },
+      {
+        "Index" : 5,
+        "Title" : "Deploying an initial Android application to the Emulator",
+        "Summary" : "In this tutorial we load our project and start the emulator that we built before. We note that we cannot build Apple iOS/macOS projects without some additional steps on windows. Building on Apple entails a good deal of prep on an Apple machine (i.e., XCode, Apple Developer certificates, provisioning, etc.), so we will focus mainly on Android development for now until we're ready to test and debug on Apple hardware.",
+        "Video" : "https://www.youtube.com/embed/9LR8X4Hx3y0"
+      },
+      {
+        "Index" : 6,
+        "Title" : "Reviewing Forms Page",
+        "Summary" : "This video covers the structure and function of the views shown to a user when the sample application is launched. An overview of the view structure is provided and the overall structure and organization of the project is reviewed.",
+        "Video" : "https://www.youtube.com/embed/3n2Of8eE6uw"
+      },
+      {
+        "Index" : 7,
+        "Title" : "Customizing Sample Forms Page ",
+        "Summary" : "In this video we begin to customize several fields in the form. We explore how to edit a title, construct a simple label, and place this label in the layout of our page. We review the launching of the application and the display of this page in the lifecycle of the application.",
+        "Video" : "https://www.youtube.com/embed/lvOXjzn9eas"
+      },
+      {
+        "Index" : 8,
+        "Title" : "Writing a Custom Forms Page Class",
+        "Summary" : "In this video we review how to the restructure our project and move code written in our app construction to a specific, custom class. We review the process of creating project structure (e.g., folders), adding new classes and using our new class to set the root page of our application.",
+        "Video" : "https://www.youtube.com/embed/6McrWVtJdD8"
+      },
+      {
+        "Index" : 9,
+        "Title" : "Creating our First XAML Project",
+        "Summary" : "In this video we review the process of starting an application project that uses XAML to construct the user interface (among other things). We review the process of creating this type of project and discuss how the XAML project and structure is similar to, and different from, our previous Blank App.",
+        "Video" : "https://www.youtube.com/embed/tGGXCt5wHro"
+      },
+      {
+        "Index" : 10,
+        "Title" : "Customizing Labels in XAML",
+        "Summary" : "This video reviews how we can style and augment how elements are displayed in XAML. We review how elements of the Label can be modified to reflect different sizes, positions, colors, and more.",
+        "Video" : "https://www.youtube.com/embed/-pR4fdNLe00"
+      },
+      {
+        "Index" : 11,
+        "Title" : "Adding Layouts to XAML Files",
+        "Summary" : "In this video we discuss and demonstrate how individual elements in a Forms page are laid out. We discuss the various layouts available and select a grid to use for our elements and our page.",
+        "Video" : "https://www.youtube.com/embed/NKMDhlSlwfE"
+      },
+      {
+        "Index" : 12,
+        "Title" : "Adding Elements to the XAML Grid",
+        "Summary" : "This video reviews how the grid layout can be used to display a range of elements in a grid-like format. Labels are placed within individual grid cells and are made to span multiple cells, as needed.",
+        "Video" : "https://www.youtube.com/embed/buhlnAPjj3M"
+      },
+      {
+        "Index" : 13,
+        "Title" : "Adding Events to Elements in XAML",
+        "Summary" : "In this video, we discuss how we can attach functionality to the views (XAML) we've created. We discussed how functionality can be added via viewmodels/controller methods as well as in the codebehind of a view. We model and demonstrate how an event can be raised and then trigger a method in the codebehind.",
+        "Video" : "https://www.youtube.com/embed/a8ExK8qtAQI"
+      }
+      ]
+  },
+  {
+    "Name" : "Excel Charting Tutorial",
+    "Summary" : "In this series we will be reviewing the process of constructing and styling plots and figures as used in single case research design. The aesthetics and style of single-case research will be demonstrated and modeled using a range of designs from start to finish. The series will begin with a review of terms, examples and non-examples, and a progression to simple-to-advanced figures often used in treatment evaluations and research figures. <br><br>All final sheets, charts, and data are available on <a href='https://github.com/miyamot0/ExcelChartingTutorial'>Github</a>",
+    "Tutorials" : [
+      {
+        "Index" : 1,
+        "Title" : "Review of Single Case Graphics and Aesthetics",
+        "Summary" : "In this tutorial, we review the process of using spreadsheet software to construct and style figures consistent with the themes and standards of single case research design. This tutorial is geared towards students, educators, and clinicians who desire additional instruction related to constructing and styling single case data.",
+        "Video" : "https://www.youtube.com/embed/OMrf6ssiB7U"
+      },
+      {
+        "Index" : 2,
+        "Title" : "Review of Plotting Terms",
+        "Summary" : "In this tutorial, we review the terms and language we will be referring to throughout the construction and design of our plots and figures. Language and terms are necessary here, as each term will relate to a specific setting and/or area in the spreadsheet where we will make changes.",
+        "Video" : "https://www.youtube.com/embed/sV9ZOcwOlzI"
+      },
+      {
+        "Index" : 3,
+        "Title" : "Constructing a Simple Line Chart",
+        "Summary" : "In this tutorial, we begin to input data into a simple line plot (scatter plot with lines and markers). We enter data for two separate types of data (baseline, treatment) and set our plot up for styling in the next tutorial.",
+        "Video" : "https://www.youtube.com/embed/5EApnMx6nUo"
+      },
+      {
+        "Index" : 4,
+        "Title" : "Modifying Axes and Plot Fonts",
+        "Summary" : "In this tutorial, we style the plot axes to make the presentation of data simpler and more readable. We also standardize the font used in the plot so we can avoid mixing multiple types of plots when using it as a figure in a report or publication.",
+        "Video" : "https://www.youtube.com/embed/id3KMYryReg"
+      },
+      {
+        "Index" : 5,
+        "Title" : "Styling Individual Data Lines",
+        "Summary" : "In this tutorial, we style individual lines to standardize our colors, markers and sizes. We also trim up the lines for later so that can keep things clear and simple when multiple lines might overlap or cross.",
+        "Video" : "https://www.youtube.com/embed/4-EzMhBax7s"
+      },
+      {
+        "Index" : 6,
+        "Title" : "Dynamic Phase Change Lines",
+        "Summary" : "In this tutorial, we create phase change lines for our data that move as we add and update data. Phase change lines drawn in this way do not need re-adjustments along the way and are a wise way to draw lines initially and avoid unnecessary work.",
+        "Video" : "https://www.youtube.com/embed/HGYf0C2pgUY"
+      },
+      {
+        "Index" : 7,
+        "Title" : "Dynamic Labels",
+        "Summary" : "In this tutorial, we create labels that move as we add and update data. Labels drawn and written in this way do not need re-adjustments later on and are a wise way to add phase descriptions that do not need to be moved.",
+        "Video" : "https://www.youtube.com/embed/FN7974fimiY"
+      },
+      {
+        "Index" : 8,
+        "Title" : "Constructing a Complex Line Chart",
+        "Summary" : "In this video, we begin working on a more complex type of line chart. Rather than having a primary line that represent singular changes, we will have several lines that alternating changes in a dependent variable. We review the process of adding data to this type of chart, even when lines are not drawn together automatically.",
+        "Video" : "https://www.youtube.com/embed/rmnDlUh_Cvs"
+      },
+      {
+        "Index" : 9,
+        "Title" : "Styling Complex Line Charts 1",
+        "Summary" : "In this video, we styling a more complex type of line chart. We begin by styling the axes and beginning to prepare the data for additional styling.",
+        "Video" : "https://www.youtube.com/embed/S-inhpJFa70"
+      },
+      {
+        "Index" : 10,
+        "Title" : "Styling Complex Line Charts 2",
+        "Summary" : "In this video, we continue styling a more complex line chart. We style individual data series and then size them accordingly to create an overall figure that looks similar that those found in single-case research outlets.",
+        "Video" : "https://www.youtube.com/embed/KDysBpsWOzs"
+      },
+      {
+        "Index" : 11,
+        "Title" : "Simple Bar Chart",
+        "Summary" : "In this video, we put together a simple bar chart using a list of data from a hypothetical preference assessment.",
+        "Video" : "https://www.youtube.com/embed/JhrWJHV2IHU"
+      },
+      {
+        "Index" : 12,
+        "Title" : "Styling a Simple Bar Chart",
+        "Summary" : "In this video, we style a simple bar chart using the tips and menus that we used in the line chart tutorials. The end result is a stimulus preference assessment figure that is suited for clinical reports and publications.",
+        "Video" : "https://www.youtube.com/embed/4Xq1Q6-DOGg"
+      },
+      {
+        "Index" : 13,
+        "Title" : "Hybrid Plots",
+        "Summary" : "In this video, we review the need for hybrid plots when the behavior of data may require a specific type of presentation. While the use of dual axes is generally discouraged in scientific writing and works, it may occasionally serve clinical value when it clearly conveys simpler data.",
+        "Video" : "https://www.youtube.com/embed/iBc1uXSBpzI"
+      },
+      {
+        "Index" : 14,
+        "Title" : "Modifying Series Types",
+        "Summary" : "In this video, we review how to transition individual data series from one form of plot to another. More specifically, we modify bar chart data to our typical scatter plot format (with lines).",
+        "Video" : "https://www.youtube.com/embed/25FipOOVeJs"
+      },
+      {
+        "Index" : 15,
+        "Title" : "Modifying Series Types 2",
+        "Summary" : "In this video, we revisit how to transition individual data series from one form of plot to another. The earlier example was susceptible to an error that produce diverging x-axes. This made it impossible to have both types of series line up cleanly.",
+        "Video" : "https://www.youtube.com/embed/RSeLOjRjs-g"
+      },
+      {
+        "Index" : 16,
+        "Title" : "Styling Hybrid Plots",
+        "Summary" : "In this video, we begin to style the hybrid plot to include all the elements commonly found in our earlier examples. We review the process of styling individual axes and other aesthetic themes.",
+        "Video" : "https://www.youtube.com/embed/nXfrcHLZKSw"
+      },
+      {
+        "Index" : 17,
+        "Title" : "Styling Hybrid Plots 2",
+        "Summary" : "In this video, we continue to style the hybrid plot to include other elements of single-case design. More specifically, we include dynamic phase change lines and labels in the figure to more completely align with the themes of single-case research design.",
+        "Video" : "https://www.youtube.com/embed/GLUvUJPu85Y"
+      },
+      {
+        "Index" : 18,
+        "Title" : "Subplots and Multiple Baselines 1",
+        "Summary" : "In this video, we review how single-case research designs use subplots in multiple baseline displays. We construct individual plots with data and discuss the logic of creating an overall figure from multiple subplots.",
+        "Video" : "https://www.youtube.com/embed/it-HOFxeYVs"
+      },
+      {
+        "Index" : 19,
+        "Title" : "Subplots and Multiple Baselines 2",
+        "Summary" : "In this video, we how to 'move' sub plots from a worksheet into a separate chart object (aka Figure). We move our three plots into this figure and add respective axes.",
+        "Video" : "https://www.youtube.com/embed/zWrvkBLfkmc"
+      },
+      {
+        "Index" : 20,
+        "Title" : "Subplots and Multiple Baselines 3",
+        "Summary" : "In this video, we continue by applying shared aesthetics across individual subplots and by modifying the axes. This presents individual subplots to the reader in a way that makes the overall presentation of the figure more uniform.",
+        "Video" : "https://www.youtube.com/embed/IdEyGIqpPgM"
+      },
+      {
+        "Index" : 21,
+        "Title" : "Subplots and Multiple Baselines 4",
+        "Summary" : "In this video, we continue constructing the overall figure formalizing axes and adding higher-level labels to the figure. We review the specific method of adding high-level labels in a way that uniformly and consistently behaves as a top-level object.",
+        "Video" : "https://www.youtube.com/embed/4HO5QGhWyiI"
+      },
+      {
+        "Index" : 22,
+        "Title" : "Subplots and Multiple Baselines 5",
+        "Summary" : "In this video, we continue apply consistent styling for individual data series and subplots. We also add phase change lines and review how and why individual phase change lines are linked in the overall figure.",
+        "Video" : "https://www.youtube.com/embed/UM0t8ZMN7rU"
+      },
+      {
+        "Index" : 23,
+        "Title" : "Subplots and Multiple Baselines 6",
+        "Summary" : "In this final video, we review a way to make a shape that is customized for linking our phase change lines. Methods for drawing, aligning, and grouping shapes were reviewed and techniques for applying this new shape to the figure are modeled.",
+        "Video" : "https://www.youtube.com/embed/laI4zmdG-D8"
+      }
+    ]
+  }
+]

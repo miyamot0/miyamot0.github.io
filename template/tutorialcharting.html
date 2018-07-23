@@ -1,0 +1,117 @@
+<script type="text/javascript">
+function loadContent() 
+{
+	console.log("loaded...");
+
+	if (!checkParamsPresent())
+	{
+		document.getElementById("tutorialChartingDirectory").style.display = "block";
+	}
+	else
+	{
+		var tutorialIndex = 1;
+		var paramString = document.location.toString().split("?")[1];
+		var index = parseInt(paramString.split("=")[1]) - 1;
+
+		$.getJSON( "json/tutorialdata.json", function( data ) {
+			var relevantTutorial = data[tutorialIndex].Tutorials;
+
+			var iframe = document.createElement('iframe');
+			iframe.src = relevantTutorial[index].Video;
+
+		  	document.getElementById("titleRef").innerHTML = relevantTutorial[index].Title;
+		  	document.getElementById("descriptionRef").innerHTML = relevantTutorial[index].Summary;
+			document.getElementById("tutorialIframeDiv").appendChild(iframe);
+
+			document.getElementById("buttonPrev").href = "ChartingTutorial.html?index=" + parseInt(index);
+			document.getElementById("buttonNext").href = "ChartingTutorial.html?index=" + parseInt(index + 2);
+
+			if (index == 0)
+			{
+				document.getElementById("buttonPrev").href = "#"
+				document.getElementById("buttonPrev").className += " invisible";
+			}
+			else if (index >= relevantTutorial.length - 1)
+			{
+				document.getElementById("buttonNext").href = "#"
+				document.getElementById("buttonNext").className += " invisible";
+			}
+
+	   		document.getElementById("tutorialChartDiv").style.display = "block";
+
+		});
+	}
+}
+
+function checkParamsPresent()
+{
+	return document.location.toString().indexOf('?') !== -1;
+}
+
+window.addEventListener('load', loadContent(), true);
+</script>
+
+<!--Main layout-->
+<div class="container">
+
+<!--Header row-->
+<div class="row">
+  <div class="col-md-12">
+      <div class="jumbotron">
+        <h1 id="titleRef" class="h1-responsive">Excel Charting Tutorial</h1>
+        <p id="descriptionRef" class="lead">In this series we will be reviewing the process of constructing and styling plots and figures as used in single case research design. The aesthetics and style of single-case research will be demonstrated and modeled using a range of designs from start to finish. The series will begin with a review of terms, examples and non-examples, and a progression to simple-to-advanced figures often used in treatment evaluations and research figures. <br><br>All final sheets, charts, and data are available on <a href='https://github.com/miyamot0/ExcelChartingTutorial'>Github</a></p>
+        <script src="https://apis.google.com/js/platform.js"></script>
+
+        <div class="g-ytsubscribe" data-channelid="UCJnW5Q1CWJIRufVTl-b5kyw" data-layout="full" data-count="default"></div>
+      </div>
+  </div>
+</div>
+<!--/.Header row-->
+
+<!--List row-->
+<div class="row">
+  <div class="col-md-12">
+      <div id="tutorialChartingDirectory" class="well" style="display: none;">
+        <ul>
+          <li class='lead'><a href='ChartingTutorial.html?index=1'>Video #01 : Review of Single Case Graphics and Aesthetics</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=2'>Video #02 : Review of Plotting Terms</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=3'>Video #03 : Constructing a Simple Line Chart</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=4'>Video #04 : Modifying Axes and Plot Fonts</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=5'>Video #05 : Styling Individual Data Lines</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=6'>Video #06 : Dynamic Phase Change Lines</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=7'>Video #07 : Dynamic Labels</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=8'>Video #08 : Constructing a Complex Line Chart</a></li><li class='lead'><a href='ChartingTutorial.html?index=9'>Video #09 : Styling Complex Line Charts 1</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=10'>Video #10 : Styling Complex Line Charts 2</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=11'>Video #11 : Simple Bar Chart</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=12'>Video #12 : Styling a Simple Bar Chart</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=13'>Video #13 : Hybrid Plots</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=14'>Video #14 : Modifying Series Types</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=15'>Video #15 : Modifying Series Types 2</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=16'>Video #16 : Styling Hybrid Plots</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=17'>Video #17 : Styling Hybrid Plots 2</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=18'>Video #18 : Subplots and Multiple Baselines 1</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=19'>Video #19 : Subplots and Multiple Baselines 2</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=20'>Video #20 : Subplots and Multiple Baselines 3</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=21'>Video #21 : Subplots and Multiple Baselines 4</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=22'>Video #22 : Subplots and Multiple Baselines 5</a></li>
+          <li class='lead'><a href='ChartingTutorial.html?index=23'>Video #23 : Subplots and Multiple Baselines 6</a></li>
+        </ul>
+      </div>
+
+      <div id="tutorialChartDiv" class="well" style="display: none;">
+        <div id="tutorialIframeDiv" class="embed-responsive embed-responsive-16by9 text-center">
+        </div>
+
+        <hr class="extra-margin">
+
+        <div class="read-more">
+            <a id="buttonPrev" href="ChartingTutorial.html?index=1" class="btn btn-info btn-raised">Previous Video</a>
+            <a id="buttonNext" href="ChartingTutorial.html?index=1" class="btn btn-info btn-raised pull-right">Next Video</a>
+        </div>
+      </div>
+  </div>
+</div>
+<!--/.List row-->
+
+</div>
+<!--/.Main layout-->
