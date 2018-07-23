@@ -1,20 +1,31 @@
 <script type="text/javascript">
 function loadContent() 
 {
-	console.log("loaded...");
+	var isInDirectory = !checkParamsPresent();
 
-	if (!checkParamsPresent())
-	{
-		document.getElementById("tutorialChartingDirectory").style.display = "block";
-	}
-	else
-	{
+	$.getJSON( "json/tutorialdata.json", function( data ) {
 		var tutorialIndex = 1;
-		var paramString = document.location.toString().split("?")[1];
-		var index = parseInt(paramString.split("=")[1]) - 1;
+		var relevantTutorial = data[tutorialIndex].Tutorials;
 
-		$.getJSON( "json/tutorialdata.json", function( data ) {
-			var relevantTutorial = data[tutorialIndex].Tutorials;
+		if (isInDirectory)
+		{
+			for (var i = 0; i < relevantTutorial.length; i++)
+			{
+				var a = document.createElement("a");
+
+				a.href = "ChartingTutorial.html?index=" + relevantTutorial[i].Index;
+				a.innerHTML = padIndexNumber(relevantTutorial[i].Index) + " - " + relevantTutorial[i].Title + "<br><br>";
+				a.className += " lead";
+
+				document.getElementById("tutorialChartingDirectory").appendChild(a);
+			}
+
+			document.getElementById("tutorialChartingDirectory").style.display = "block";
+		}
+		else
+		{
+			var paramString = document.location.toString().split("?")[1];
+			var index = parseInt(paramString.split("=")[1]) - 1;
 
 			var iframe = document.createElement('iframe');
 			iframe.src = relevantTutorial[index].Video;
@@ -37,15 +48,18 @@ function loadContent()
 				document.getElementById("buttonNext").className += " invisible";
 			}
 
-	   		document.getElementById("tutorialChartDiv").style.display = "block";
-
-		});
-	}
+			document.getElementById("tutorialChartDiv").style.display = "block";			
+		}
+	});
 }
 
 function checkParamsPresent()
 {
 	return document.location.toString().indexOf('?') !== -1;
+}
+
+function padIndexNumber(number) {
+    return Array(Math.max(3 - String(number).length + 1, 0)).join(0) + number;
 }
 
 window.addEventListener('load', loadContent(), true);
@@ -72,30 +86,6 @@ window.addEventListener('load', loadContent(), true);
 <div class="row">
   <div class="col-md-12">
       <div id="tutorialChartingDirectory" class="well" style="display: none;">
-        <ul>
-          <li class='lead'><a href='ChartingTutorial.html?index=1'>Video #01 : Review of Single Case Graphics and Aesthetics</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=2'>Video #02 : Review of Plotting Terms</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=3'>Video #03 : Constructing a Simple Line Chart</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=4'>Video #04 : Modifying Axes and Plot Fonts</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=5'>Video #05 : Styling Individual Data Lines</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=6'>Video #06 : Dynamic Phase Change Lines</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=7'>Video #07 : Dynamic Labels</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=8'>Video #08 : Constructing a Complex Line Chart</a></li><li class='lead'><a href='ChartingTutorial.html?index=9'>Video #09 : Styling Complex Line Charts 1</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=10'>Video #10 : Styling Complex Line Charts 2</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=11'>Video #11 : Simple Bar Chart</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=12'>Video #12 : Styling a Simple Bar Chart</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=13'>Video #13 : Hybrid Plots</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=14'>Video #14 : Modifying Series Types</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=15'>Video #15 : Modifying Series Types 2</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=16'>Video #16 : Styling Hybrid Plots</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=17'>Video #17 : Styling Hybrid Plots 2</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=18'>Video #18 : Subplots and Multiple Baselines 1</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=19'>Video #19 : Subplots and Multiple Baselines 2</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=20'>Video #20 : Subplots and Multiple Baselines 3</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=21'>Video #21 : Subplots and Multiple Baselines 4</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=22'>Video #22 : Subplots and Multiple Baselines 5</a></li>
-          <li class='lead'><a href='ChartingTutorial.html?index=23'>Video #23 : Subplots and Multiple Baselines 6</a></li>
-        </ul>
       </div>
 
       <div id="tutorialChartDiv" class="well" style="display: none;">
