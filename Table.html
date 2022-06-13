@@ -12801,7 +12801,7 @@
         margin: 1px;
         text-indent: -999px;
         cursor: pointer;
-        background-color: #000\9;
+        background-color: #000;
         background-color: rgba(0, 0, 0, 0);
         border: 1px solid #fff;
         border-radius: 10px;
@@ -18603,6 +18603,13 @@
       table.dataTable td {
         box-sizing: content-box;
       }
+
+      /* HACK */
+      table.display td {
+        padding: 3px 10px;
+        white-space: nowrap;
+      }
+
       .dataTables_wrapper {
         position: relative;
         clear: both;
@@ -28495,7 +28502,7 @@
 
       <div
         id="htmlwidget-73c7b3546cc0f1957886"
-        style="width: 100%; height: auto"
+        style="width: 100%; height: auto; overflow-x: auto"
         class="datatables html-widget"
       ></div>
       <script
@@ -42043,13 +42050,15 @@
                 "No"
               ]
             ],
-            "container": "<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Year<\/th>\n      <th>Authors<\/th>\n      <th>Title<\/th>\n      <th>Journal<\/th>\n      <th>DOI<\/th>\n      <th>Participants<\/th>\n      <th>Disability<\/th>\n      <th>Experiment<\/th>\n      <th>N (low)<\/th>\n      <th>N (high)<\/th>\n      <th>N_Groups<\/th>\n      <th>N_visits.sessions<\/th>\n      <th>N_Consec_Test_Points<\/th>\n      <th>Training<\/th>\n      <th>Elimination<\/th>\n      <th>Test<\/th>\n      <th>R1 EXT<\/th>\n      <th>Design<\/th>\n      <th>Within-subjects Evaluation<\/th>\n      <th>Repeated Same Test<\/th>\n      <th>Antecedent Change<\/th>\n      <th>Worsening<\/th>\n      <th>Mitigation<\/th>\n      <th>Inactive Response<\/th>\n      <th>Typical Resurgence Procedure<\/th>\n      <th>Elim EXT R1 No Alt SR.<\/th>\n      <th>Omit R1 training<\/th>\n      <th>Test presents Alt SR<\/th>\n      <th>Target vs Alt Type1<\/th>\n      <th>X Alt resp<\/th>\n      <th>P1 Target<\/th>\n      <th>P2 Alt<\/th>\n      <th>Control<\/th>\n      <th>R2 in P1<\/th>\n      <th>Target vs Alt Type2<\/th>\n      <th>Target1<\/th>\n      <th>Alt1<\/th>\n      <th>Operant Type<\/th>\n      <th>COR<\/th>\n      <th>Response Sequence<\/th>\n      <th>Deceleration Procedure<\/th>\n      <th>Target vs Alt Type3<\/th>\n      <th>Target2<\/th>\n      <th>Alt2<\/th>\n      <th>Target3<\/th>\n      <th>Alt3<\/th>\n      <th>Course credit<\/th>\n      <th>Punishment<\/th>\n      <th>Resurgence Defined Primary<\/th>\n      <th>Resurgence Defined Secondary<\/th>\n      <th>Resurgence Defined Tertiary<\/th>\n      <th>Primary Analysis<\/th>\n      <th>Other Analysis 1<\/th>\n      <th>Other Analysis 2<\/th>\n      <th>Primary DV<\/th>\n      <th>Other DV 1<\/th>\n      <th>Other DV 2<\/th>\n      <th>Other DV 3<\/th>\n      <th>Primary Derived Measure<\/th>\n      <th>Other Derived 1<\/th>\n      <th>Other Derived 2<\/th>\n      <th>BMT Model sim<\/th>\n      <th>BMT Model fit<\/th>\n      <th>RaC Model sim<\/th>\n      <th>RaC Model fit<\/th>\n      <th>Gen Model sim.<\/th>\n      <th>Gen Model fit<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>",
+            "container": "<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Year<\/th>\n      <th>Study Authors<\/th>\n      <th>Study Title<\/th>\n      <th>Journal<\/th>\n      <th>DOI<\/th>\n      <th>Participants<\/th>\n      <th>Disability<\/th>\n      <th>Experiment<\/th>\n      <th>N (low)<\/th>\n      <th>N (high)<\/th>\n      <th>N_Groups<\/th>\n      <th>N_visits.sessions<\/th>\n      <th>N_Consec_Test_Points<\/th>\n      <th>Training<\/th>\n      <th>Elimination<\/th>\n      <th>Test<\/th>\n      <th>R1 EXT<\/th>\n      <th>Design<\/th>\n      <th>Within-subjects Evaluation<\/th>\n      <th>Repeated Same Test<\/th>\n      <th>Antecedent Change<\/th>\n      <th>Worsening<\/th>\n      <th>Mitigation<\/th>\n      <th>Inactive Response<\/th>\n      <th>Typical Resurgence Procedure<\/th>\n      <th>Elimination EXT R1 No Alternative SR.<\/th>\n      <th>Omit R1 training<\/th>\n      <th>Test presents Alt SR<\/th>\n      <th>Target vs Alt Type1<\/th>\n      <th>X Alt resp<\/th>\n      <th>P1 Target<\/th>\n      <th>P2 Alt<\/th>\n      <th>Control<\/th>\n      <th>R2 in P1<\/th>\n      <th>Target vs Alt Type2<\/th>\n      <th>Target1<\/th>\n      <th>Alt1<\/th>\n      <th>Operant Type<\/th>\n      <th>COR<\/th>\n      <th>Response Sequence<\/th>\n      <th>Deceleration Procedure<\/th>\n      <th>Target vs Alt Type3<\/th>\n      <th>Target2<\/th>\n      <th>Alt2<\/th>\n      <th>Target3<\/th>\n      <th>Alt3<\/th>\n      <th>Course credit<\/th>\n      <th>Punishment<\/th>\n      <th>Resurgence Defined Primary<\/th>\n      <th>Resurgence Defined Secondary<\/th>\n      <th>Resurgence Defined Tertiary<\/th>\n      <th>Primary Analysis<\/th>\n      <th>Other Analysis 1<\/th>\n      <th>Other Analysis 2<\/th>\n      <th>Primary DV<\/th>\n      <th>Other DV 1<\/th>\n      <th>Other DV 2<\/th>\n      <th>Other DV 3<\/th>\n      <th>Primary Derived Measure<\/th>\n      <th>Other Derived 1<\/th>\n      <th>Other Derived 2<\/th>\n      <th>BMT Model sim<\/th>\n      <th>BMT Model fit<\/th>\n      <th>RaC Model sim<\/th>\n      <th>RaC Model fit<\/th>\n      <th>Gen Model sim.<\/th>\n      <th>Gen Model fit<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>",
             "options": {
               "searchHighlight": true,
               "dom": "Bfrtip",
               "buttons": ["colvis"],
               "scrollX": true,
-              "autoWidth": true,
+              "responsive": false,
+              "autoWidth": false,
+              "pageLength": 20,
               "order": [],
               "orderClasses": false
             }
