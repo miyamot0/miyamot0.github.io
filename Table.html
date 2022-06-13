@@ -6028,6 +6028,9 @@
       th {
         padding: 0;
       }
+      .dataTables_filter > label {
+        color: #000;
+      }
       @media print {
         *,
         :after,
@@ -6084,9 +6087,7 @@
         .dropup > .btn > .caret {
           border-top-color: #000 !important;
         }
-        .label {
-          border: 1px solid #000;
-        }
+
         .table {
           border-collapse: collapse !important;
         }
@@ -9882,6 +9883,7 @@
       textarea.input-group-sm > .input-group-btn > .btn {
         height: auto;
       }
+
       .input-group .form-control,
       .input-group-addon,
       .input-group-btn {
@@ -10029,7 +10031,7 @@
       .nav-tabs > li > a {
         margin-right: 2px;
         line-height: 1.42857143;
-        border: 1px solid transparent;
+        border: 0px solid transparent;
         border-radius: 4px 4px 0 0;
       }
       .nav-tabs > li > a:hover {
@@ -10041,7 +10043,7 @@
         color: #555;
         cursor: default;
         background-color: #fff;
-        border: 1px solid #ddd;
+        border: 0px solid #ddd;
         border-bottom-color: transparent;
       }
       .nav-tabs.nav-justified {
@@ -10075,11 +10077,11 @@
       .nav-tabs.nav-justified > .active > a,
       .nav-tabs.nav-justified > .active > a:focus,
       .nav-tabs.nav-justified > .active > a:hover {
-        border: 1px solid #ddd;
+        border: 0px solid #ddd;
       }
       @media (min-width: 768px) {
         .nav-tabs.nav-justified > li > a {
-          border-bottom: 1px solid #ddd;
+          border-bottom: 0px solid #ddd;
           border-radius: 4px 4px 0 0;
         }
         .nav-tabs.nav-justified > .active > a,
@@ -10143,7 +10145,7 @@
       .nav-tabs-justified > .active > a,
       .nav-tabs-justified > .active > a:focus,
       .nav-tabs-justified > .active > a:hover {
-        border: 1px solid #ddd;
+        border: 0px solid #ddd;
       }
       @media (min-width: 768px) {
         .nav-tabs-justified > li > a {
@@ -10171,11 +10173,13 @@
         position: relative;
         min-height: 50px;
         margin-bottom: 20px;
-        border: 1px solid transparent;
+        border: 0px solid transparent;
       }
       @media (min-width: 768px) {
         .navbar {
+          /*
           border-radius: 4px;
+          */
         }
       }
       @media (min-width: 768px) {
@@ -10860,7 +10864,7 @@
         font-size: 75%;
         font-weight: 700;
         line-height: 1;
-        color: #fff;
+        color: #000;
         text-align: center;
         white-space: nowrap;
         vertical-align: baseline;
